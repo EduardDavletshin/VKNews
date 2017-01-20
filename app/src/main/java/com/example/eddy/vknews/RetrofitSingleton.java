@@ -3,9 +3,6 @@ package com.example.eddy.vknews;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by eddy on 1/19/2017.
- */
 
 public class RetrofitSingleton {
 

@@ -3,10 +3,6 @@ package Models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by eddy on 1/18/2017.
- */
-
 public class Profile implements Parcelable {
     public static final Creator<Profile> CREATOR = new Creator<Profile>() {
         @Override

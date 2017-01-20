@@ -5,10 +5,6 @@ import android.os.Parcelable;
 
 import java.util.ArrayList;
 
-/**
- * Created by eddy on 1/18/2017.
- */
-
 public class Response implements Parcelable {
     private ArrayList<Item> items;
     private ArrayList<Profile> profiles;

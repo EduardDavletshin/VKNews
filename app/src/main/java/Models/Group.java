@@ -3,10 +3,6 @@ package Models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by eddy on 1/18/2017.
- */
-
 public class Group implements Parcelable{
     private int id;
     private String name;

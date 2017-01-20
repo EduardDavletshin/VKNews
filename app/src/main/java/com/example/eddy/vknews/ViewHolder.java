@@ -8,10 +8,6 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by eddy on 1/19/2017.
- */
-
 public class ViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.image_avatar)

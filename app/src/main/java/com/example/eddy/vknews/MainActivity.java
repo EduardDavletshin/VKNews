@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     NewsLoader newsLoader;
-    VKCallback callback;
     private String[] scope = new String[]{VKScope.WALL, VKScope.FRIENDS};
 
     @Override

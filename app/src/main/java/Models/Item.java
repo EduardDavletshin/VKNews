@@ -3,9 +3,6 @@ package Models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by eddy on 1/18/2017.
- */
 
 public class Item implements Parcelable{
     private String type;
