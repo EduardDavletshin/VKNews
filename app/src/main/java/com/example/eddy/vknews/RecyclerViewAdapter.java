@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 
 import com.squareup.picasso.Picasso;
 
+import Models.Group;
+import Models.Item;
+import Models.Profile;
 import Models.Response;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
@@ -26,22 +29,27 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.textPostText.setText(newsResponse.getItems().get(position).getText());
+        Item dataPosition = newsResponse.getItems().get(position);
 
-        if (newsResponse.getItems().get(position).getSource_id() < 0) {
+        holder.textPostText.setText(dataPosition.getText());
+
+        if (dataPosition.getSource_id() < 0) {
             for (int i = 0; i < newsResponse.getGroups().size(); i++) {
-                if (newsResponse.getGroups().get(i).getId() == newsResponse.getItems().get(position).getSource_id()) {
-                    holder.textUser.setText(newsResponse.getGroups().get(i).getName());
-                    Picasso.with(holder.imageAvatar.getContext()).load(String.valueOf(newsResponse.getGroups().get(i)
+                Group group = newsResponse.getGroups().get(i);
+                if (group.getId() == dataPosition.getSource_id() * -1) {
+                    holder.textUser.setText(group.getName());
+                    holder.textLastname.setText("");
+                    Picasso.with(holder.imageAvatar.getContext()).load(String.valueOf(group
                             .getPhoto_100())).into(holder.imageAvatar);
                 }
             }
         } else {
             for (int i = 0; i < newsResponse.getProfiles().size(); i++) {
-                if (newsResponse.getProfiles().get(i).getId() == newsResponse.getItems().get(position).getSource_id()) {
-                    holder.textUser.setText(newsResponse.getProfiles().get(i).getFirst_name());
-                    holder.textLastname.setText(newsResponse.getProfiles().get(i).getLast_name());
-                    Picasso.with(holder.imageAvatar.getContext()).load(String.valueOf(newsResponse.getProfiles().get(i)
+                Profile profile = newsResponse.getProfiles().get(i);
+                if (profile.getId() == dataPosition.getSource_id()) {
+                    holder.textUser.setText(profile.getFirst_name());
+                    holder.textLastname.setText(profile.getLast_name());
+                    Picasso.with(holder.imageAvatar.getContext()).load(String.valueOf(profile
                             .getPhoto_100())).into(holder.imageAvatar);
                 }
             }

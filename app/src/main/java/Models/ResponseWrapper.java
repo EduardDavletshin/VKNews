@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class ResponseWrapper implements Parcelable {
+
     public static final Creator<ResponseWrapper> CREATOR = new Creator<ResponseWrapper>() {
         @Override
         public ResponseWrapper createFromParcel(Parcel in) {
@@ -15,6 +16,7 @@ public class ResponseWrapper implements Parcelable {
             return new ResponseWrapper[size];
         }
     };
+
     private Response response;
 
     protected ResponseWrapper(Parcel in) {

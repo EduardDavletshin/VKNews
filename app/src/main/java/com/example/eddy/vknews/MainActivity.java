@@ -13,19 +13,17 @@ import com.vk.sdk.VKScope;
 import com.vk.sdk.VKSdk;
 import com.vk.sdk.api.VKError;
 
-import Models.Response;
 import Models.ResponseWrapper;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
     public static String token;
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
-    ResponseWrapper responseWrapper;
     NewsLoader newsLoader;
+    VKCallback callback;
     private String[] scope = new String[]{VKScope.WALL, VKScope.FRIENDS};
 
     @Override
@@ -44,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 // User passed Authorization
                 Toast.makeText(getApplicationContext(), "Authorized", Toast.LENGTH_LONG).show();
                 token = res.accessToken;
+                loadNews();
             }
 
             @Override
@@ -56,23 +55,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick(R.id.button_news)
     public void loadNews() {
         newsLoader = new NewsLoader(new Callback() {
             @Override
             public void onFinish(ResponseWrapper callbackResponse) {
-                responseWrapper = callbackResponse;
-                initRecyclerView(responseWrapper);
+                initRecyclerView(callbackResponse);
             }
-
         });
         newsLoader.execute();
     }
 
-    public void initRecyclerView(ResponseWrapper response) {
-        if (response != null) {
+    public void initRecyclerView(ResponseWrapper responseWrapper) {
+        if (responseWrapper != null) {
             recyclerView.setHasFixedSize(true);
-            recyclerView.setAdapter(new RecyclerViewAdapter(response.getResponse()));
+            recyclerView.setAdapter(new RecyclerViewAdapter(responseWrapper.getResponse()));
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
         }
     }
