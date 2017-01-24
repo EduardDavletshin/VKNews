@@ -19,11 +19,11 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final static String[] scope = new String[]{VKScope.WALL, VKScope.FRIENDS};
     public static String token;
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     NewsLoader newsLoader;
-    private String[] scope = new String[]{VKScope.WALL, VKScope.FRIENDS};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

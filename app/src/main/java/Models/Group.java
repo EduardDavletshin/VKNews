@@ -3,15 +3,20 @@ package Models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Group implements Parcelable{
     private int id;
     private String name;
-    private String photo_100;
+    @SerializedName("photo_100")
+    @Expose
+    private String photo100;
 
     protected Group(Parcel in) {
         id = in.readInt();
         name = in.readString();
-        photo_100 = in.readParcelable(Image.class.getClassLoader());
+        photo100 = in.readParcelable(Image.class.getClassLoader());
     }
 
     public static final Creator<Group> CREATOR = new Creator<Group>() {
@@ -35,7 +40,7 @@ public class Group implements Parcelable{
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
         dest.writeString(name);
-        dest.writeString(photo_100);
+        dest.writeString(photo100);
     }
 
     public int getId() {
@@ -46,7 +51,7 @@ public class Group implements Parcelable{
         return name;
     }
 
-    public String getPhoto_100() {
-        return photo_100;
+    public String getPhoto100() {
+        return photo100;
     }
 }

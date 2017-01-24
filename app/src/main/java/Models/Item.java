@@ -3,15 +3,20 @@ package Models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 
 public class Item implements Parcelable{
     private String type;
-    private int source_id;
+    @SerializedName("source_id")
+    @Expose
+    private int sourceId;
     private String text;
 
     protected Item(Parcel in) {
         type = in.readString();
-        source_id = in.readInt();
+        sourceId = in.readInt();
         text = in.readString();
     }
 
@@ -35,7 +40,7 @@ public class Item implements Parcelable{
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(type);
-        dest.writeInt(source_id);
+        dest.writeInt(sourceId);
         dest.writeString(text);
     }
 
@@ -43,8 +48,8 @@ public class Item implements Parcelable{
         this.type = type;
     }
 
-    public void setSource_id(int source_id) {
-        this.source_id = source_id;
+    public void setSourceId(int sourceId) {
+        this.sourceId = sourceId;
     }
 
     public void setText(String text) {
@@ -56,8 +61,8 @@ public class Item implements Parcelable{
         return type;
     }
 
-    public int getSource_id() {
-        return source_id;
+    public int getSourceId() {
+        return sourceId;
     }
 
     public String getText() {
