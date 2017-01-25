@@ -87,6 +87,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
             for (int i = attachmentArrayList.size(); i < 9; i++) {
                 holder.images[i].setVisibility(View.GONE);
             }
+        } else {
+            for (int i = 0; i < 9; i++) {
+                holder.images[i].setVisibility(View.GONE);
+            }
         }
     }
 
