@@ -7,6 +7,6 @@ import retrofit2.http.Query;
 
 interface VkApiRequestInterface {
 
-    @GET("/method/newsfeed.get?filters=post&v=5.62")
+    @GET("/method/newsfeed.get?filters=post&source_ids=g39009769&v=5.62")
     Call<ResponseWrapper> getResponse(@Query("access_token") String token);
 }

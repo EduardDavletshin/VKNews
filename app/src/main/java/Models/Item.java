@@ -3,21 +3,23 @@ package Models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
 
 
 public class Item implements Parcelable{
     private String type;
     @SerializedName("source_id")
-    @Expose
     private int sourceId;
     private String text;
+    private ArrayList<Attachment> attachments;
 
-    protected Item(Parcel in) {
+    private Item(Parcel in) {
         type = in.readString();
         sourceId = in.readInt();
         text = in.readString();
+        attachments = in.createTypedArrayList(Attachment.CREATOR);
     }
 
     public static final Creator<Item> CREATOR = new Creator<Item>() {
@@ -32,6 +34,39 @@ public class Item implements Parcelable{
         }
     };
 
+    public ArrayList<Attachment> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(ArrayList<Attachment> attachments) {
+        this.attachments = attachments;
+    }
+
+    public String getType() {
+
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getSourceId() {
+        return sourceId;
+    }
+
+    public void setSourceId(int sourceId) {
+        this.sourceId = sourceId;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -42,30 +77,6 @@ public class Item implements Parcelable{
         dest.writeString(type);
         dest.writeInt(sourceId);
         dest.writeString(text);
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setSourceId(int sourceId) {
-        this.sourceId = sourceId;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public String getType() {
-
-        return type;
-    }
-
-    public int getSourceId() {
-        return sourceId;
-    }
-
-    public String getText() {
-        return text;
+        dest.writeTypedList(attachments);
     }
 }

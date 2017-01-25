@@ -3,7 +3,13 @@ package Models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class ResponseWrapper implements Parcelable {
+public class ResponseWrapper implements Parcelable{
+
+    private Response response;
+
+    private ResponseWrapper(Parcel in) {
+        response = in.readParcelable(Response.class.getClassLoader());
+    }
 
     public static final Creator<ResponseWrapper> CREATOR = new Creator<ResponseWrapper>() {
         @Override
@@ -16,12 +22,6 @@ public class ResponseWrapper implements Parcelable {
             return new ResponseWrapper[size];
         }
     };
-
-    private Response response;
-
-    protected ResponseWrapper(Parcel in) {
-        response = in.readParcelable(Response.class.getClassLoader());
-    }
 
     public Response getResponse() {
         return response;

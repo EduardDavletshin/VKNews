@@ -1,6 +1,6 @@
 package com.example.eddy.vknews;
 
-import android.support.annotation.StringDef;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
+import Models.Attachment;
 import Models.Group;
 import Models.Item;
 import Models.Profile;
@@ -52,48 +55,39 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
         return profile;
     }
 
-
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Item itemPosition = newsResponse.getItems().get(position);
+        Context context = holder.imageAvatar.getContext();
 
         holder.textPostText.setText(itemPosition.getText());
-        if (itemPosition.getSourceId() < 0 ) {
+        if (itemPosition.getSourceId() < 0) {
             holder.textUser.setText(findGroupById(position).getName());
             holder.textLastname.setText("");
-            Picasso.with(holder.imageAvatar.getContext()).load(findGroupById(position)
+            Picasso.with(context).load(findGroupById(position)
                     .getPhoto100()).into(holder.imageAvatar);
         } else {
             holder.textUser.setText(findProfileById(position).getFirst_name());
             holder.textLastname.setText(findProfileById(position).getLast_name());
-            Picasso.with(holder.imageAvatar.getContext()).load(findProfileById(position)
+            Picasso.with(context).load(findProfileById(position)
                     .getPhoto_100()).into(holder.imageAvatar);
         }
-//
-//        if (dataPosition.getSourceId() < 0) {
-//            for (int i = 0; i < newsResponse.getGroups().size(); i++) {
-//                Group group = newsResponse.getGroups().get(i);
-//                if (group.getId() == dataPosition.getSourceId() * -1) {
-//                    holder.textUser.setText(group.getName());
-//                    holder.textLastname.setText("");
-//                    Picasso.with(holder.imageAvatar.getContext()).load(String.valueOf(group
-//                            .getPhoto100())).into(holder.imageAvatar);
-//                    Log.e("width", String.valueOf(holder.imageAvatar.getWidth()));
-//                    break;
-//                }
-//            }
-//        } else {
-//            for (int i = 0; i < newsResponse.getProfiles().size(); i++) {
-//                Profile profile = newsResponse.getProfiles().get(i);
-//                if (profile.getId() == dataPosition.getSourceId()) {
-//                    holder.textUser.setText(profile.getFirst_name());
-//                    holder.textLastname.setText(profile.getLast_name());
-//                    Picasso.with(holder.imageAvatar.getContext()).load(String.valueOf(profile
-//                            .getPhoto_100())).into(holder.imageAvatar);
-//                    break;
-//                }
-//            }
-//        }
+
+        ArrayList<Attachment> attachmentArrayList = itemPosition.getAttachments();
+        if (attachmentArrayList != null) {
+            for (int i = 0; i < attachmentArrayList.size() && i < 9; i++) {
+                if (attachmentArrayList.get(i).getPhoto() != null &&
+                        attachmentArrayList.get(i).getPhoto().getPhoto604() != null) {
+                    Picasso.with(context)
+                            .load(attachmentArrayList.get(i).getPhoto().getPhoto604())
+                            .into(holder.images[i]);
+                    holder.images[i].setVisibility(View.VISIBLE);
+                }
+            }
+            for (int i = attachmentArrayList.size(); i < 9; i++) {
+                holder.images[i].setVisibility(View.GONE);
+            }
+        }
     }
 
     @Override

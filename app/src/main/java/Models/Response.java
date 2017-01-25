@@ -5,10 +5,22 @@ import android.os.Parcelable;
 
 import java.util.ArrayList;
 
-public class Response implements Parcelable {
+public class Response implements Parcelable{
     private ArrayList<Item> items;
     private ArrayList<Profile> profiles;
     private ArrayList<Group> groups;
+
+    public Response(ArrayList<Item> items, ArrayList<Profile> profiles, ArrayList<Group> groups) {
+        this.items = items;
+        this.profiles = profiles;
+        this.groups = groups;
+    }
+
+    private Response(Parcel in) {
+        items = in.createTypedArrayList(Item.CREATOR);
+        profiles = in.createTypedArrayList(Profile.CREATOR);
+        groups = in.createTypedArrayList(Group.CREATOR);
+    }
 
     public static final Creator<Response> CREATOR = new Creator<Response>() {
         @Override
@@ -21,31 +33,6 @@ public class Response implements Parcelable {
             return new Response[size];
         }
     };
-
-    public Response(ArrayList<Item> items, ArrayList<Profile> profiles, ArrayList<Group> groups) {
-        this.items = items;
-        this.profiles = profiles;
-        this.groups = groups;
-    }
-
-    protected Response(Parcel in) {
-        items = in.createTypedArrayList(Item.CREATOR);
-        profiles = in.createTypedArrayList(Profile.CREATOR);
-        groups = in.createTypedArrayList(Group.CREATOR);
-
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeTypedList(items);
-        dest.writeTypedList(profiles);
-        dest.writeTypedList(groups);
-    }
 
     public ArrayList<Item> getItems() {
         return items;
@@ -69,5 +56,17 @@ public class Response implements Parcelable {
 
     public void setGroups(ArrayList<Group> groups) {
         this.groups = groups;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeTypedList(items);
+        dest.writeTypedList(profiles);
+        dest.writeTypedList(groups);
     }
 }
