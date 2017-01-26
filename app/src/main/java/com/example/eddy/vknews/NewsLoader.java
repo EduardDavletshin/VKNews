@@ -2,9 +2,9 @@ package com.example.eddy.vknews;
 
 import android.os.AsyncTask;
 
-import java.io.IOException;
+import com.example.eddy.vknews.Models.ResponseWrapper;
 
-import Models.ResponseWrapper;
+import java.io.IOException;
 
 import static com.example.eddy.vknews.MainActivity.token;
 

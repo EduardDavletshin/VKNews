@@ -1,7 +1,9 @@
-package Models;
+package com.example.eddy.vknews.Models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import java.util.ArrayList;
 
 public class Profile implements Parcelable {
     public static final Creator<Profile> CREATOR = new Creator<Profile>() {
@@ -25,6 +27,21 @@ public class Profile implements Parcelable {
         first_name = in.readString();
         last_name = in.readString();
         photo_100 = in.readParcelable(Image.class.getClassLoader());
+    }
+
+    public static Profile findProfileBySourceId(ArrayList<Profile> profiles, int sourceId) {
+        Profile profile = null;
+        for (int i = 0; i < profiles.size(); i++) {
+            if (profiles.get(i).getId() == sourceId) {
+                profile = profiles.get(i);
+                break;
+            }
+        }
+        return profile;
+    }
+
+    public static boolean isSourceProfile(int sourceId) {
+        return sourceId > 0;
     }
 
     public int getId() {

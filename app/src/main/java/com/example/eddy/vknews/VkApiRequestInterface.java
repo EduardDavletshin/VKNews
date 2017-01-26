@@ -1,6 +1,6 @@
 package com.example.eddy.vknews;
 
-import Models.ResponseWrapper;
+import com.example.eddy.vknews.Models.ResponseWrapper;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

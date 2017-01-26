@@ -1,9 +1,11 @@
-package Models;
+package com.example.eddy.vknews.Models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
 
 public class Group implements Parcelable {
     public static final Creator<Group> CREATOR = new Creator<Group>() {
@@ -26,6 +28,21 @@ public class Group implements Parcelable {
         id = in.readInt();
         name = in.readString();
         photo100 = in.readParcelable(Image.class.getClassLoader());
+    }
+
+    public static Group findGroupBySourceId(ArrayList<Group> groups, int sourceId) {
+        Group group = null;
+        for (int i = 0; i < groups.size(); i++) {
+            if (groups.get(i).getId() == sourceId * -1) {
+                group = groups.get(i);
+                break;
+            }
+        }
+        return group;
+    }
+
+    public static boolean isSourceGroup(int sourceId) {
+        return sourceId < 0;
     }
 
     @Override

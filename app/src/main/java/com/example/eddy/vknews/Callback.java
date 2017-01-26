@@ -1,6 +1,6 @@
 package com.example.eddy.vknews;
 
-import Models.ResponseWrapper;
+import com.example.eddy.vknews.Models.ResponseWrapper;
 
 interface Callback {
     void onFinish(ResponseWrapper callbackResponse);

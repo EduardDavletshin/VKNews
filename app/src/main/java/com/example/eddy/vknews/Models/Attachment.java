@@ -1,4 +1,4 @@
-package Models;
+package com.example.eddy.vknews.Models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
