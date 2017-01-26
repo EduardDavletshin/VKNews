@@ -2,9 +2,11 @@ package com.example.eddy.vknews;
 
 import android.os.AsyncTask;
 
+import com.example.eddy.vknews.Models.Item;
 import com.example.eddy.vknews.Models.ResponseWrapper;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static com.example.eddy.vknews.MainActivity.token;
 
@@ -26,9 +28,11 @@ public class NewsLoader extends AsyncTask<Object, Object, ResponseWrapper> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (int i = 0; i < responseWrapper.getResponse().getItems().size(); i++) {
-            if (responseWrapper.getResponse().getItems().get(i).getAttachments() == null) {
-                responseWrapper.getResponse().getItems().remove(i);
+
+        ArrayList<Item> items = responseWrapper.getResponse().getItems();
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).getAttachments() == null) {
+                items.remove(i);
             }
         }
         return responseWrapper;
