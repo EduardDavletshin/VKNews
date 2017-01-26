@@ -26,6 +26,11 @@ public class NewsLoader extends AsyncTask<Object, Object, ResponseWrapper> {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        for (int i = 0; i < responseWrapper.getResponse().getItems().size(); i++) {
+            if (responseWrapper.getResponse().getItems().get(i).getAttachments() == null) {
+                responseWrapper.getResponse().getItems().remove(i);
+            }
+        }
         return responseWrapper;
     }
 
