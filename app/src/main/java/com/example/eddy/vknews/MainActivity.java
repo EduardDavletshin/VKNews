@@ -1,64 +1,48 @@
 package com.example.eddy.vknews;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
 import com.example.eddy.vknews.Models.ResponseWrapper;
-import com.vk.sdk.VKAccessToken;
-import com.vk.sdk.VKCallback;
-import com.vk.sdk.VKScope;
-import com.vk.sdk.VKSdk;
-import com.vk.sdk.api.VKError;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final static String[] scope = new String[]{VKScope.WALL, VKScope.FRIENDS};
-    public static String token;
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     NewsLoader newsLoader;
+    ResponseWrapper responseWrapper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        VKSdk.login(this, scope);
+        loadNews();
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (!VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
-            @Override
-            public void onResult(VKAccessToken res) {
-                // User passed Authorization
-                Toast.makeText(getApplicationContext(), "Authorized", Toast.LENGTH_LONG).show();
-                token = res.accessToken;
-                loadNews();
-            }
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("jsonresponse", responseWrapper);
+    }
 
-            @Override
-            public void onError(VKError error) {
-                // User didn't pass Authorization
-                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
-            }
-        })) {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        savedInstanceState.getParcelable("jsonresponse");
     }
 
     public void loadNews() {
         newsLoader = new NewsLoader(new Callback() {
             @Override
             public void onFinish(ResponseWrapper callbackResponse) {
-                initRecyclerView(callbackResponse);
+                responseWrapper = callbackResponse;
+                initRecyclerView(responseWrapper);
             }
         });
         newsLoader.execute();

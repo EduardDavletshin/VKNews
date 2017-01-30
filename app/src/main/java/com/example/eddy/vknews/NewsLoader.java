@@ -8,7 +8,7 @@ import com.example.eddy.vknews.Models.ResponseWrapper;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static com.example.eddy.vknews.MainActivity.token;
+import static com.example.eddy.vknews.LoginActivity.token;
 
 
 public class NewsLoader extends AsyncTask<Object, Object, ResponseWrapper> {

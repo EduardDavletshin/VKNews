@@ -127,7 +127,7 @@ public class VKAccessToken {
         edit.apply();
     }
 
-    private VKAccessToken() {
+    protected VKAccessToken() {
     }
 
     /**
