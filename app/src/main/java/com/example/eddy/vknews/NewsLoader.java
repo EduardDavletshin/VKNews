@@ -8,7 +8,7 @@ import com.example.eddy.vknews.Models.ResponseWrapper;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static com.example.eddy.vknews.LoginActivity.token;
+import static com.example.eddy.vknews.Activities.LoginActivity.token;
 
 
 public class NewsLoader extends AsyncTask<Object, Object, ResponseWrapper> {
@@ -16,7 +16,7 @@ public class NewsLoader extends AsyncTask<Object, Object, ResponseWrapper> {
     private ResponseWrapper responseWrapper;
     private Callback callback;
 
-    NewsLoader(Callback callback) {
+    public NewsLoader(Callback callback) {
         this.callback = callback;
     }
 

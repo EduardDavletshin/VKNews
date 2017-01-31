@@ -1,9 +1,10 @@
-package com.example.eddy.vknews;
+package com.example.eddy.vknews.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.eddy.vknews.R;
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKCallback;
 import com.vk.sdk.VKScope;
