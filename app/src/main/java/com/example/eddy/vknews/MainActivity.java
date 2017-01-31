@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
+import com.example.eddy.vknews.Adapters.RecyclerViewAdapter;
 import com.example.eddy.vknews.Models.ResponseWrapper;
 
 import butterknife.BindView;
@@ -14,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
+    @BindView(R.id.my_toolbar)
+    Toolbar toolbar;
     NewsLoader newsLoader;
     ResponseWrapper responseWrapper;
 
@@ -22,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        toolbar.setTitle(R.string.app_name);
         loadNews();
     }
 

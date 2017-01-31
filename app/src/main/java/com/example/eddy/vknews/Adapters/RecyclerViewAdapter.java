@@ -1,4 +1,4 @@
-package com.example.eddy.vknews;
+package com.example.eddy.vknews.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.eddy.vknews.R;
+import com.example.eddy.vknews.ViewHolder;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -30,7 +32,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_view, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_item, parent, false);
         return new ViewHolder(v);
     }
 

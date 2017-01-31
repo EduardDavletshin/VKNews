@@ -10,13 +10,13 @@ import butterknife.ButterKnife;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
 
-    @BindView(R.id.image_avatar)
+    public @BindView(R.id.image_avatar)
     ImageView imageAvatar;
-    @BindView(R.id.text_user)
+    public @BindView(R.id.text_user)
     TextView textUser;
-    @BindView(R.id.text_user_lastname)
+    public @BindView(R.id.text_user_lastname)
     TextView textLastname;
-    @BindView(R.id.text_post_text)
+    public @BindView(R.id.text_post_text)
     TextView textPostText;
     @BindView(R.id.image_1)
     ImageView image1;
@@ -36,7 +36,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     ImageView image8;
     @BindView(R.id.image_9)
     ImageView image9;
-    ImageView[] images;
+    public ImageView[] images;
 
 
     public ViewHolder(View itemView) {
